@@ -103,7 +103,12 @@ for (let i = 0; i < posts.length; i++) {
 /* like button */
 for (let i = 0; i < posts.length; i++) {
     document.querySelector(`[data-postid="${posts[i].id}"]`).addEventListener("click", function(){
-        document.querySelector(`[data-postid="${posts[i].id}"]`).classList.add("like-button--liked");
-        document.getElementById(`like-counter-${posts[i].id}`).innerHTML = posts[i].likes + 1;
+        if (!this.classList.contains("like-button--liked")) {
+            this.classList.add("like-button--liked");
+            document.getElementById(`like-counter-${posts[i].id}`).innerHTML = posts[i].likes + 1;
+        } else {
+            this.classList.remove("like-button--liked");
+            document.getElementById(`like-counter-${posts[i].id}`).innerHTML = posts[i].likes;
+        }
     });
 }
